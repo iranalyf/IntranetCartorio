@@ -1,0 +1,54 @@
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<f:metadata>
+		<f:event listener="#{certidaoController.inicializaCertidoes}"
+			type="preRenderView" />
+	</f:metadata>
+
+	<ui:define name="corpo">
+		<h1>Pesquisa de Certidões</h1>
+
+		<h:form id="frmPesquisa">
+			<p:messages id="messages" autoUpdate="true" closable="true" />
+			<br />
+
+			<p:dataTable id="certidoesTable" style="margin-top: 20px"
+				emptyMessage="Nenhuma certidão encontrada." rows="20"
+				paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom" value="#{certidaoController.certidoes}"
+				var="c">
+				<p:column headerText="Código"
+					style="text-align: center; width: 100px">
+					<h:outputText value="#{c.idCertidao}" />
+				</p:column>
+				<p:column headerText="Nome">
+					<h:outputText value="#{c.nome}" />
+				</p:column>
+
+				<p:column headerText="Data" style="text-align: center; width: 130px">
+					<h:outputText value="#{c.data}" />
+				</p:column>
+
+				<p:column style="width: 100px; text-align: center">
+					<p:button icon="ui-icon-pencil" title="Editar"
+						outcome="/certidoes/CadastroCertidao">
+						<f:param value="#{c.idCertidao}" name="certidao" />
+					</p:button>
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						action="#{certidaoController.excluir}" process="@this"
+						update="certidoesTable">
+						<f:setPropertyActionListener value="#{c}"
+							target="#{certidaoController.certidaoSelecionada}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>

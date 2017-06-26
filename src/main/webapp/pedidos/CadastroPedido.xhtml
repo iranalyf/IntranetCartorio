@@ -1,0 +1,61 @@
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<f:metadata>
+		<f:viewParam value="#{pedidoCertidaoController.pedidoCertidao}"
+			name="pedido" />
+		<f:event listener="#{pedidoCertidaoController.inicializaClientes}"
+			type="preRenderView" />
+		<f:event listener="#{pedidoCertidaoController.inicializaCertidoes}"
+			type="preRenderView" />
+	</f:metadata>
+
+	<ui:define name="corpo">
+
+		<h1>#{pedidoCertidaoController.pedidoCertidao.idPedidoCertidao ==
+			null ? 'Cadastro de Pedido' : 'Edição de Pedido'}</h1>
+
+		<h:form id="frmCadastro">
+			<p:messages id="messages" autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Salvar" id="botaoSalvar"
+						action="#{pedidoCertidaoController.salvar}" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="6" id="painel" styleClass="semBorda"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+
+				<p:outputLabel value="Data:" />
+				<p:calendar pattern="dd/MM/yyyy"
+					value="#{pedidoCertidaoController.pedidoCertidao.data}" />
+
+				<p:outputLabel value="Cliente" />
+				<p:selectOneMenu
+					value="#{pedidoCertidaoController.pedidoCertidao.cliente}">
+					<f:selectItem itemLabel="Selecione" />
+					<f:selectItems value="#{pedidoCertidaoController.clientes}"
+						var="cl" itemLabel="#{cl.nomeCompleto}" itemValue="#{cl}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Certidão" />
+				<p:selectOneMenu
+					value="#{pedidoCertidaoController.pedidoCertidao.certidao}">
+					<f:selectItem itemLabel="Selecione" />
+					<f:selectItems value="#{pedidoCertidaoController.certidoes}"
+						var="c" itemLabel="#{c.nome}" itemValue="#{c}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Observação:" />
+				<p:inputTextarea rows="4" cols="40"
+					value="#{pedidoCertidaoController.pedidoCertidao.observacao}" />
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

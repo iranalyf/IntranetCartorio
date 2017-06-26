@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+	<meta charset="UTF-8" />
+	<h:outputStylesheet library="css" name="estilo.css" />
+</h:head>
+
+<h:body>
+
+	<header>
+		<div style="float: left; margin-left: 40px"></div>
+
+		<div style="float: right; margin-right: 110px">
+
+			<h:form style="display: inline-block">
+				<p:menubar styleClass="menu-sistema">
+
+					<p:submenu label="Home">
+						<p:menuitem value="Tela Principal" outcome="/Home"/>
+					</p:submenu>
+
+					<p:submenu label="Cadastros">
+						<p:menuitem value="Cadastrar Cliente"
+							outcome="/clientes/CadastroCliente" />
+						<p:separator />
+						<p:menuitem value="Cadastrar Certidão"
+							outcome="/certidoes/CadastroCertidao" />
+
+					</p:submenu>
+
+					<p:submenu label="Consultas">
+
+						<p:menuitem value="Pesquisar Clientes"
+							outcome="/clientes/PesquisaClientes" />
+						<p:separator />
+						<p:menuitem value="Pesquisar Certidões"
+							outcome="/certidoes/PesquisaCertidoes" />
+						<p:separator />
+						<p:menuitem value="Pesquisar Pedidos"
+							outcome="/pedidos/PesquisaPedidos" />
+					</p:submenu>
+
+					<p:submenu label="Fazer Pedido">
+
+						<p:menuitem value="Cadastrar Pedido"
+							outcome="/pedidos/CadastroPedido" />
+
+					</p:submenu>
+
+				</p:menubar>
+			</h:form>
+
+		</div>
+		<div style="clear: both"></div>
+	</header>
+
+	<div id="conteudo">
+		<ui:insert name="corpo" />
+
+	</div>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<footer>
+		<hr />
+		<span>© Copyright 2017 Todos os Direitos Reservados.. System
+			Intranet p/ Cartório</span>
+	</footer>
+</h:body>
+</html>
